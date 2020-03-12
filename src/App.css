@@ -21,10 +21,10 @@
 .modal-main {
   position:fixed;
   background: white;
-  width: 80%;
+  width: 50%;
   height: auto;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%,-50%);
 }
 
@@ -35,3 +35,67 @@
 .display-none {
   display: none;
 }
+
+.post-modal-header {
+  background: black;
+  height: 20%;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  position: relative;
+}
+
+.description-input {
+  width: 75%;
+  height: 30%;
+}
+
+input[type=text]:focus {
+  background-color: rgb(142, 204, 225);
+}
+
+.post-form > div {
+  padding-left: 10%;
+  width: 100%;
+}
+
+.post-form > div > input {
+  border-radius: 4px;
+  background-color: rgb(162, 221, 240)k;
+  padding: 8px;
+  width: 75%;
+  height: 50%;
+}
+
+.post-form > div > option {
+  border-radius: 4px;
+  background-color: rgb(162, 221, 240)k;
+  padding: 8px;
+  width: 75%;
+  height: 50%;
+}
+
+.post-form > span {
+  border-radius: 4px;
+  background-color: rgb(162, 221, 240)k;
+  padding: 10%;
+  width: 75%;
+  height: 50%;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  background:none;
+  border: none;
+  font-size: 30px;
+}
+
+div.submit-button > input {
+  margin: 5%;
+  width: 20%;
+  position: relative;
+  left: 1px;
+}    

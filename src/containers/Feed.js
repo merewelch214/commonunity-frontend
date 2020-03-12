@@ -5,7 +5,8 @@ import Modal from './Modal';
 export default class Feed extends React.Component {
     state = {
         posts: [],
-        showNewPostModal: false
+        showNewPostModal: false,
+        currentUserId: 1
     }
 
     componentDidMount() {
@@ -15,15 +16,19 @@ export default class Feed extends React.Component {
     }
 
     toggleModal = () => {
-        console.log('toggled')
-        console.log(this.state)
         this.setState({ showNewPostModal: !this.state.showNewPostModal });
     };
+
+    getRecentPosts = (newPost) => {
+        this.setState({ 
+            posts: [...this.state.posts, newPost]
+        })
+    }
 
     render() {
         return (
             <div>
-                <Modal show={this.state.showNewPostModal} handleClose={this.toggleModal} />
+                <Modal show={this.state.showNewPostModal} handleClose={this.toggleModal} currentUserId={this.state.currentUserId} shareRecentPosts={this.getRecentPosts}/>
                 <button onClick={this.toggleModal}>Create New Post</button>
 
                 <div id='feedContainer'> 
