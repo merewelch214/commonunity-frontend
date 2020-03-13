@@ -2,7 +2,7 @@ import React from 'react';
 import Post from './Post';
 import Modal from './Modal';
 
-export default class Feed extends React.Component {
+class Feed extends React.Component {
     state = {
         posts: [],
         showNewPostModal: false,
@@ -25,17 +25,21 @@ export default class Feed extends React.Component {
         })
     }
 
+
     render() {
+        const sortedPosts = [...this.state.posts].sort((a, b) => b.id - a.id)
+
         return (
-            <div>
+            <div className='Feed'>
                 <Modal show={this.state.showNewPostModal} handleClose={this.toggleModal} currentUserId={this.state.currentUserId} shareRecentPosts={this.getRecentPosts}/>
                 <button onClick={this.toggleModal}>Create New Post</button>
 
                 <div id='feedContainer'> 
-                    {this.state.posts.map(post => <Post {...post} key={post.id}/>)}
+                    {sortedPosts.map(post => <Post {...post} key={post.id}/>)}
                 </div>
             </div>  
         )
     }
-
 }
+
+export default Feed;

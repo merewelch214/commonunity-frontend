@@ -38,6 +38,12 @@ class Modal extends React.Component {
         })
         .then(res => res.json())
         .then(data => this.props.shareRecentPosts(data))
+        this.setState({
+            title: '',
+            category: '',
+            summary: '',
+            expires_at: ''
+        })
     }
     
     render() {
