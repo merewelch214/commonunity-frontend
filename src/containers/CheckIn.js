@@ -10,9 +10,15 @@ class CheckIn extends React.Component {
         long: ''
     }
 
+    componentDidMount() {
+        fetch(`http://localhost:3000/check_ins_by_user_id/${this.state.currentUserId}`)
+        .then(resp => resp.json())
+        .then(data => data.location ? this.setState({location: data.location}) : this.setState({location: ''}) )
+    }
+    
     checkIn = e => {
         this.setState({
-           location: e.target.name
+           location: e.target.name  
         })
         fetch(`http://localhost:3000/check_ins`,{
             method: 'POST',
@@ -21,46 +27,56 @@ class CheckIn extends React.Component {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                location: this.state.location,
                 user_id: this.state.currentUserId,
-                 
-                checked_in_at: 'today'
+                location: e.target.name,
+                location_text: this.state.location_text
             })
         })
     }
 
     checkOut = e => {
-        const check_in_id = '?'
         this.setState({
-           location: ''
-        })
-        fetch(`http://localhost:3000/check_ins/${check_in_id}`, {
+            location: '',
+            location_text: ''})
+        fetch(`http://localhost:3000/check_ins_by_user_id/${this.state.currentUserId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify('something goes here')
+            body: JSON.stringify({
+                checked_in_at: 'now'
+            })
         })
     }
 
-    logSafetyConcern = (lat,long) => {
-
+    success = (pos) => {
+        this.setState({lat: pos.coords.latitude})
+        this.setState({long: pos.coords.longitude})
+     }
+        
+    error = (err) => {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+       
+    logSafetyConcern = () => {
+        navigator.geolocation.getCurrentPosition(this.success, this.error)
+        
     }
 
     render() {
         const checkInButtons =
             <div className='check-out'>
-                <button name='member_visit' onClick={this.checkIn}>Member Visit</button>
-                <button name='facility' onClick={this.checkIn}>Facility</button>
-                <button name='touchdown_space' onClick={this.checkIn}>Touchdown Space</button>
-                <button name='other' onClick={this.checkIn}>Other</button>
+                <button name='Member Visit' onClick={this.checkIn}>Member Visit</button>
+                <button name='Facility' onClick={this.checkIn}>Facility</button>
+                <button name='Touchdown Space' onClick={this.checkIn}>Touchdown Space</button>
+                <button name='Other' onClick={this.checkIn}>Other</button>
             </div>
             
         const checkOutButtons = 
             <div className='check-safety'>
                 <button name='' onClick={this.logSafetyConcern}>Log Safety Concern</button>
-                <button name='' onClick={this.checkOut}>Check Out: {this.state.location}</button><br />
+                <button name='' onClick={this.checkOut}>Checking out of <b> {this.state.location} </b> </button><br />
             </div>
 
         return (

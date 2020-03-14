@@ -7,7 +7,6 @@
   
   display: flex;
   flex-direction: column;
-  
 }
 
 .header {
@@ -18,17 +17,19 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
+  position: fixed;
+  z-index: 1
 }
 
 .MainContainer {
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-top: 60px;
 }
 
 .Feed {
   flex: 2;
-  align-items: center;
   order: 2;
   border-left: 1px solid lightslategray;
   height: 100vh;
@@ -42,7 +43,6 @@
 }
 
 .check-in-container {
-  border-bottom: grey 1px solid;
   flex-direction: row;
   height: 30vh;
 }
@@ -110,18 +110,69 @@ input[type=text]:focus {
   font-size: 30px;
 }   
 
-.announcement {
-  background: purple;
+button {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  margin: 5px;
+  border-radius: 4px;
+  z-index: 3
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post-card {
+  width: 90%;
+  border: 2px grey solid;
+  margin: 20px;
+}
+
+.post-card > h1 {
+  background-color: black;
+  color: white;
+  top: 0px;
+  position: relative;
+}
+
+/* .announcement {
+  width: 80%;
+  border: 1px grey, solid;
+  
 }
 
 .new_feature {
-  background: yellow;
+  width: 80%;
+  border: 1px grey, solid;
 }
 
 .shout_out {
-  background: blue;
+  width: 80%;
+  border: 1px grey, solid;
 }
 
 .urgent_alert {
   background: red;
+} */
+
+.location-feed > h1{
+  background: black;
+  color: white;
+  height: 8%;
+  width: 100%;
+  position: relative;
+
+}
+
+.location-card {
+  width: 90%;
+  border: 2px grey solid;
+  margin: 20px;
 }
