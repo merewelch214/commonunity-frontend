@@ -25,6 +25,15 @@ class Modal extends React.Component {
         )
     }
 
+    clearState = () => {
+        this.setState({
+            title: '',
+            category: '',
+            summary: '',
+            expires_at: ''
+        })
+    }
+
     handleSubmit = e => {
         e.preventDefault()
         const newPost = {...this.state, user_id: this.props.currentUserId}
@@ -37,22 +46,23 @@ class Modal extends React.Component {
             body: JSON.stringify(newPost) 
         })
         .then(res => res.json())
-        .then(data => this.props.shareRecentPosts(data))
-        this.setState({
-            title: '',
-            category: '',
-            summary: '',
-            expires_at: ''
-        })
+        .then(data => this.props.shareRecentPosts(data)) 
+        this.clearState()
+        this.props.handleClose()
+    }
+
+    buttonDisabled = () => {
+        if (this.state.title === "" || this.state.summary === "" || this.state.category === "") {
+            return true
+        } else {return false}
     }
     
     render() {
-
         return (
             <div className={this.props.show ? "modal display-block" : "modal display-none"}>
                 <section className="modal-main">
                     <div className="post-modal-header">
-                        New Post
+                        New Announcement
                         <button className='close' onClick={this.props.handleClose}>×</button>
                     </div>
                     <form onSubmit={this.handleSubmit} className='post-form'>
@@ -77,9 +87,8 @@ class Modal extends React.Component {
                             </select>
                             {this.state.category === 'urgent_alert' ? this.showExpiresAtField() : null }
                         </span>
-                        {/* if questions are not filled in, disable button */}
                         <div className='submit'>
-                            <input type="submit" value="Submit" onClick={this.props.handleClose}/> 
+                            <button type="submit" value="Submit" onClick={this.props.handleSubmit} disabled={this.buttonDisabled()}>Submit</button> 
                         </div>
                     </form>
                    

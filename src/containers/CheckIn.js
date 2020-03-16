@@ -81,6 +81,7 @@ class CheckIn extends React.Component {
 
         return (
             <div className='check-in-container'>  
+                <h1>Your Location</h1>
                 {this.state.location ? checkOutButtons : checkInButtons}
             </div>
         )

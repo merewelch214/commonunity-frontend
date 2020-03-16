@@ -15,7 +15,6 @@ class LocationFeed extends React.Component {
     }
     
     render() {
-        console.log(this.state)
         return (
             <div className='location-feed'>
                 <h1>Your Team</h1>

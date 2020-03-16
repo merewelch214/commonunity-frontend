@@ -32,7 +32,7 @@ class Feed extends React.Component {
         return (
             <div className='Feed'>
                 <Modal show={this.state.showNewPostModal} handleClose={this.toggleModal} currentUserId={this.state.currentUserId} shareRecentPosts={this.getRecentPosts}/>
-                <button onClick={this.toggleModal}>Create New Post</button>
+                <button id='new-post' onClick={this.toggleModal}>New Announcement</button>
 
                 <div id='feedContainer'> 
                     {sortedPosts.map(post => <Post {...post} key={post.id}/>)}
