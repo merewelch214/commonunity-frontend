@@ -5,8 +5,7 @@ import Modal from './Modal';
 class Feed extends React.Component {
     state = {
         posts: [],
-        showNewPostModal: false,
-        currentUserId: 1
+        showNewPostModal: false
     }
 
     componentDidMount() {
@@ -25,15 +24,18 @@ class Feed extends React.Component {
         })
     }
 
-
     render() {
         const sortedPosts = [...this.state.posts].sort((a, b) => b.id - a.id)
 
         return (
             <div className='Feed'>
-                <Modal show={this.state.showNewPostModal} handleClose={this.toggleModal} currentUserId={this.state.currentUserId} shareRecentPosts={this.getRecentPosts}/>
-                <button id='new-post' onClick={this.toggleModal}>New Announcement</button>
-
+                {this.props.currentUser.is_manager 
+                    && 
+                <button id='new-post' onClick={this.toggleModal}>New Announcement</button>}
+                <Modal show={this.state.showNewPostModal} 
+                    handleClose={this.toggleModal} 
+                    currentUser={this.props.currentUser} 
+                    shareRecentPosts={this.getRecentPosts}/> 
                 <div id='feedContainer'> 
                     {sortedPosts.map(post => <Post {...post} key={post.id}/>)}
                 </div>

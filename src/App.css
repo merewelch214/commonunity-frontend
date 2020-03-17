@@ -224,3 +224,16 @@ button:hover {
 .user-auth {
   margin-top: 75px; 
 }
+
+.logout {
+  top: 0px;
+  right: 0px;
+  background: white;
+  color: black;
+  border: 1px black solid;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}

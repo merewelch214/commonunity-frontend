@@ -17,11 +17,18 @@ class App extends React.Component {
       currentUser: user
     }, ()=> {this.props.history.push('/feed')})
   }
+
+  logOut = () => {
+    this.setState({
+    currentUser: ''
+    }, () => {this.props.history.push('/login')}
+    )
+  }
   
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header currentUser={this.state.currentUser} logOut={this.logOut}/>
         <Switch>
           <Route path='/signup' render={() => <SignUp setUser={this.setUser} />}/>
           <Route path='/login' render={() => <Login setUser={this.setUser} />}/>

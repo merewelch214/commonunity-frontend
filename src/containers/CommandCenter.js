@@ -6,8 +6,7 @@ class CommandCenter extends React.Component {
     render() {
         return (
             <div className='CommandCenter'>
-                {/* only show if user is not manager */}
-                <CheckIn />
+                {!this.props.currentUser.is_manager && <CheckIn currentUser={this.props.currentUser} />}
                 <LocationFeed />
             </div>
         )

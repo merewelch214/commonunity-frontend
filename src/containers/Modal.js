@@ -36,7 +36,7 @@ class Modal extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        const newPost = {...this.state, user_id: this.props.currentUserId}
+        const newPost = {...this.state, user_id: this.props.currentUser.id}
         fetch(`http://localhost:3000/posts`, {
             method: 'POST',
             headers: {

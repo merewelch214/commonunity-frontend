@@ -5,13 +5,12 @@ class CheckIn extends React.Component {
     state = {
         location: '',
         location_text: '',
-        currentUserId: 1,
         lat: '',
         long: ''
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/check_ins_by_user_id/${this.state.currentUserId}`)
+        fetch(`http://localhost:3000/check_ins_by_user_id/${this.props.currentUser.id}`)
         .then(resp => resp.json())
         .then(data => data.location ? this.setState({location: data.location}) : this.setState({location: ''}) )
     }
@@ -27,7 +26,7 @@ class CheckIn extends React.Component {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                user_id: this.state.currentUserId,
+                user_id: this.props.currentUser.id,
                 location: e.target.name,
                 location_text: this.state.location_text
             })
@@ -38,21 +37,30 @@ class CheckIn extends React.Component {
         this.setState({
             location: '',
             location_text: ''})
-        fetch(`http://localhost:3000/check_ins_by_user_id/${this.state.currentUserId}`, {
+        fetch(`http://localhost:3000/check_ins_by_user_id/${this.props.currentUser.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                checked_in_at: 'now'
-            })
+            }
         })
     }
 
     success = (pos) => {
         this.setState({lat: pos.coords.latitude})
         this.setState({long: pos.coords.longitude})
+        fetch(`http://localhost:3000/safety_concern`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: this.props.currentUser.id,
+                latitude: this.state.lat,
+                longitude: this.state.long
+            })
+        })
      }
         
     error = (err) => {
@@ -61,7 +69,6 @@ class CheckIn extends React.Component {
        
     logSafetyConcern = () => {
         navigator.geolocation.getCurrentPosition(this.success, this.error)
-        
     }
 
     render() {

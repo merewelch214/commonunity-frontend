@@ -6,8 +6,8 @@ class MainContainer extends React.Component {
     render() {
         return (
         <div className="MainContainer">
-            <Feed />
-            <CommandCenter />
+            <Feed currentUser={this.props.currentUser}/>
+            <CommandCenter currentUser={this.props.currentUser}/>
         </div>
         );
       }
