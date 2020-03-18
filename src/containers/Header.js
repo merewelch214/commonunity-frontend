@@ -9,6 +9,15 @@ const Header = (props) => {
                 exact><button className='logout' onClick={props.logOut}>Log Out 
                 </button>
             </NavLink>}
+            {props.currentUser.is_manager && <NavLink to="/feed"
+                exact><button className='logout' onClick={props.showFeed}> Announcements 
+                </button>
+            </NavLink>}
+            {props.currentUser.is_manager && <NavLink to="/safety_concerns"
+                exact><button className='logout' onClick={props.showSafety}> Safety Concerns 
+                </button>
+            </NavLink>}
+
         </div>
     )
 }

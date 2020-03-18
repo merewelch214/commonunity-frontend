@@ -1,4 +1,12 @@
 import React from 'react';
+import SafetyConcernBanner from './SafetyConcernBanner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHospital } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faLaptop } from '@fortawesome/free-solid-svg-icons'
+import { faSearchLocation } from '@fortawesome/free-solid-svg-icons'
+import { faLifeRing } from '@fortawesome/free-solid-svg-icons'
+
 
 class CheckIn extends React.Component {
     
@@ -9,11 +17,28 @@ class CheckIn extends React.Component {
         long: ''
     }
 
+
+
     componentDidMount() {
-        fetch(`http://localhost:3000/check_ins_by_user_id/${this.props.currentUser.id}`)
-        .then(resp => resp.json())
-        .then(data => data.location ? this.setState({location: data.location}) : this.setState({location: ''}) )
+        Promise.all([
+            fetch(`http://localhost:3000/check_ins_by_user_id/${this.props.currentUser.id}`)
+                .then(resp => resp.json())
+                .then(check_in=>
+                    this.setState({
+                    location: check_in.location,
+                    location_text: check_in.location_text})
+                ),
+            fetch(`http://localhost:3000/safety_concerns_by_user_id/${this.props.currentUser.id}`)
+                .then(resp => resp.json())
+                .then(safety_concern =>
+                    this.setState({
+                    lat: safety_concern.latitude,
+                    long: safety_concern.longitude
+                })
+            )
+        ])
     }
+
     
     checkIn = e => {
         this.setState({
@@ -74,15 +99,15 @@ class CheckIn extends React.Component {
     render() {
         const checkInButtons =
             <div className='check-out'>
-                <button name='Member Visit' onClick={this.checkIn}>Member Visit</button>
-                <button name='Facility' onClick={this.checkIn}>Facility</button>
-                <button name='Touchdown Space' onClick={this.checkIn}>Touchdown Space</button>
-                <button name='Other' onClick={this.checkIn}>Other</button>
+                <button name='Member Visit' onClick={this.checkIn}> <FontAwesomeIcon icon={faHome} color='grey' /> Member Visit</button>
+                <button name='Facility' onClick={this.checkIn}><FontAwesomeIcon icon={faHospital} color='grey' />Facility</button>
+                <button name='Touchdown Space' onClick={this.checkIn}><FontAwesomeIcon icon={faLaptop} color='grey' />Touchdown Space</button>
+                <button name='Other' onClick={this.checkIn}><FontAwesomeIcon icon={faSearchLocation} color='grey' />Other</button>
             </div>
             
         const checkOutButtons = 
             <div className='check-safety'>
-                <button name='' onClick={this.logSafetyConcern}>Log Safety Concern</button>
+                <button name='' onClick={this.logSafetyConcern}><FontAwesomeIcon icon={faLifeRing} color='red' />Log Safety Concern</button>
                 <button name='' onClick={this.checkOut}>Checking out of <b> {this.state.location} </b> </button><br />
             </div>
 
@@ -90,6 +115,7 @@ class CheckIn extends React.Component {
             <div className='check-in-container'>  
                 <h1>Your Location</h1>
                 {this.state.location ? checkOutButtons : checkInButtons}
+                {this.state.lat && <SafetyConcernBanner />}
             </div>
         )
     }
