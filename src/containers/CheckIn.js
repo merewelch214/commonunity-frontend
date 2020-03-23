@@ -99,15 +99,25 @@ class CheckIn extends React.Component {
     render() {
         const checkInButtons =
             <div className='check-out'>
-                <button name='Member Visit' onClick={this.checkIn}> <FontAwesomeIcon icon={faHome} color='grey' /> Member Visit</button>
-                <button name='Facility' onClick={this.checkIn}><FontAwesomeIcon icon={faHospital} color='grey' />Facility</button>
-                <button name='Touchdown Space' onClick={this.checkIn}><FontAwesomeIcon icon={faLaptop} color='grey' />Touchdown Space</button>
-                <button name='Other' onClick={this.checkIn}><FontAwesomeIcon icon={faSearchLocation} color='grey' />Other</button>
+                <button name='Member Visit' onClick={this.checkIn}> 
+                <FontAwesomeIcon icon={faHome} color='grey' /> <br />
+                Member Visit</button>
+                <button name='Facility' onClick={this.checkIn}> 
+                    <FontAwesomeIcon icon={faHospital} color='grey' /><br />
+                    Facility</button>
+                <button name='Touchdown Space' onClick={this.checkIn}>
+                    <FontAwesomeIcon icon={faLaptop} color='grey' /><br />
+                    Touchdown Space</button>
+                <button name='Other' onClick={this.checkIn}>
+                    <FontAwesomeIcon icon={faSearchLocation} color='grey' /><br />
+                    Other</button>
             </div>
             
         const checkOutButtons = 
             <div className='check-safety'>
-                <button name='' onClick={this.logSafetyConcern}><FontAwesomeIcon icon={faLifeRing} color='red' />Log Safety Concern</button>
+                <button name='' onClick={this.logSafetyConcern}>
+                    <FontAwesomeIcon icon={faLifeRing} color='red' />
+                    Log Safety Concern</button>
                 <button name='' onClick={this.checkOut}>Checking out of <b> {this.state.location} </b> </button><br />
             </div>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -15,7 +15,7 @@ function LocationFeed(props) {
                 <b>{props.location}</b> at <b><Moment format="LLL">{props.check_out_time ? props.check_out_time : props.check_in_time}</Moment></b>.
             </div>
             <div className='location-icon'>
-                 <FontAwesomeIcon icon={faSignInAlt} color='grey' />
+                 {/* <FontAwesomeIcon icon={faSignInAlt} color='grey' /> */}
             </div>
         </div>
     )

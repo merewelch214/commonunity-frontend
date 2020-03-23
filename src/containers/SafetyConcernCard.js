@@ -1,8 +1,8 @@
 import React from 'react';
 import Moment from 'react-moment';
 import GoogleMapReact from 'google-map-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 class SafetyConcernCard extends React.Component {
@@ -37,7 +37,8 @@ class SafetyConcernCard extends React.Component {
     render() {
         const resolved = !!this.props.concern.resolved_at
         
-        const Marker = () => <FontAwesomeIcon icon={faMapMarkerAlt} color='red' />;
+        const Marker = () => <div>here</div>
+        // <FontAwesomeIcon icon={faMapMarkerAlt} color='red' />;
 
         const resolutionForm = 
             <div>

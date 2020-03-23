@@ -157,7 +157,7 @@ button {
   top: 0px;
 }
 
-#new-post {
+.log-out {
   position: fixed;
   top: 1%;
   right: 1%;
@@ -249,4 +249,9 @@ a {
   background-color: red;
   height: 20px;
   width: 20px;
+}
+
+.check-out > button {
+  height: 100px;
+  width: 100px;
 }

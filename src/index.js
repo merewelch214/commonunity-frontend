@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ActionCableProvider } from 'actioncable-client-react';
 
 ReactDOM.render(<Router>
-                    <App />
+                    <ActionCableProvider url='ws://localhost:3000/cable'>
+                        <App />
+                    </ActionCableProvider>
                 </Router>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
