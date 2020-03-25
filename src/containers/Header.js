@@ -17,6 +17,7 @@ const Header = (props) => {
                 <li> 
                     {props.currentUser && <NavLink to="/" exact onClick={props.logOut}>Log Out</NavLink> }
                 </li>
+                <li id='user-initial'>{props.currentUser && props.currentUser.name[0]}</li>
             </ul>
         </div>
     )

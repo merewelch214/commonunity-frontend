@@ -62,35 +62,35 @@ class Modal extends React.Component {
                 <section className="modal-main">
                     <div className="post-modal-header">
                         New Announcement
-                        <button className='close' onClick={this.props.handleClose}>×</button>
+                        <div className='close' onClick={this.props.handleClose}>×</div>
                     </div>
-                    <form onSubmit={this.handleSubmit} className='post-form'>
-                        <div className='title-input'>
-                            Title< br />
-                            <label name='title' />
-                            <input type='text' name='title' value={this.state.title} onChange={this.handleChange}/><br />
-                        </div>
-                        <div className='description-input'>
-                            Description<br />
-                            <label name='summary' />
-                            <input type='textarea' name='summary' value={this.state.summary} onChange={this.handleChange} id='description-box'/> <br/>
-                        </div>
-                        <span className='category-input'>    
-                            Category <br />
-                            <label name='category' />
+                    <div className="user-outer">
+                        <form onSubmit={this.handleSubmit} className='post-form'>
+                        <ul>
+                        <li>
+                            <label name='title'>Title</label>
+                            <input type='text' name='title' value={this.state.title} onChange={this.handleChange}/><br /><br />
+                        </li>
+                        <li>
+                            <label name='summary'>Description</label>
+                            <textarea name='summary' value={this.state.summary} onChange={this.handleChange} id='description-box' rows={9} cols={50}/> <br/>
+                        </li>
+                        <li>
+                            <label name='category'>Category</label>
                             <select name='category' value={this.state.category} onChange={this.handleChange}>
                                 <option value='announcement'>Announcement</option>
                                 <option value='new_feature'>New Feature</option>
                                 <option value='shout_out'>Shout Out</option>
                                 <option value='urgent_alert'>Urgent Alert</option>
                             </select>
-                            {this.state.category === 'urgent_alert' ? this.showExpiresAtField() : null }
-                        </span>
-                        <div className='submit'>
-                            <button type="submit" value="Submit" onClick={this.props.handleSubmit} disabled={this.buttonDisabled()}>Submit</button> 
-                        </div>
-                    </form>
-                   
+                        </li>
+                        
+                            <li>{this.state.category === 'urgent_alert' ? this.showExpiresAtField() : null }</li>
+                            
+                            <li><button type="submit" value="Submit" onClick={this.props.handleSubmit} disabled={this.buttonDisabled()}>Submit</button> </li>   
+                            </ul>
+                    </form>  
+                    </div> 
                 </section>
             </div>
             );
