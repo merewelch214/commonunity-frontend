@@ -5,19 +5,19 @@ const Header = (props) => {
     return (
         <div className='header'>
             <h1> CommonUnity </h1>
-            {props.currentUser && <NavLink to="/"
-                exact><button className='logout' onClick={props.logOut}>Log Out 
-                </button>
-            </NavLink>}
-            {props.currentUser.is_manager && <NavLink to="/feed"
-                exact><button className='logout' onClick={props.showFeed}> Announcements 
-                </button>
-            </NavLink>}
-            {props.currentUser.is_manager && <NavLink to="/safety_concerns"
-                exact><button className='logout' onClick={props.showSafety}> Safety Concerns 
-                </button>
-            </NavLink>}
 
+            <ul className='manager-buttons'>
+                <li>
+                    {props.currentUser.is_manager && <NavLink to="/feed" exact onClick={props.showFeed}>Announcements</NavLink>}
+                </li>
+                <li>{props.currentUser.is_manager && <NavLink to="/safety_concerns"
+                    exact onClick={props.showSafety}>Safety Concerns 
+                    </NavLink>}
+                </li>
+                <li> 
+                    {props.currentUser && <NavLink to="/" exact onClick={props.logOut}>Log Out</NavLink> }
+                </li>
+            </ul>
         </div>
     )
 }

@@ -49,7 +49,7 @@ class LocationFeed extends React.Component {
     render() {
         return (
             <div className='location-feed'>
-                <h1>Your Team</h1>
+                <p>YOUR TEAM</p>
                 <ul>
                     <ActionCable channel={'TeamChannel'} onReceived={this.handleReceived} />
                     {this.state.check_ins.map(check_in => <LocationCard key={check_in.id} user={check_in.user.name} location={check_in.location} check_in_time={check_in.created_at} check_out_time={check_in.checked_in_at}/>)}

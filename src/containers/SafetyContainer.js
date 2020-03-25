@@ -27,9 +27,13 @@ class SafetyContainer extends React.Component {
     render() {
 
         return (
-            <div className='Feed'>
-                <h1> Logged Safety Concerns </h1>
-                {this.state.safety_concerns.map(concern => <SafetyConcernCard concern={concern} key={concern.id} update={this.getUpdatedSafetyConcerns}/>)}
+            <div className='feed'>
+                <div className='feed-header'>
+                    <p>Logged Safety Concerns</p>
+                </div>
+                <div className='feed-container'>
+                    {this.state.safety_concerns.map(concern => <SafetyConcernCard concern={concern} key={concern.id} update={this.getUpdatedSafetyConcerns}/>)}
+                </div>
             </div>
         )
     }

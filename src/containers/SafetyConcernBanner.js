@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SafetyConcernBanner() {
+const SafetyConcernBanner = () => {
     return (
         <div className='modal'>
             <div className='safety-concern-banner'>

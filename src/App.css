@@ -1,24 +1,145 @@
+/* Navy: rgb(25, 26, 52)
+BlueGrey: #70737C
+LtBlue: #94A1A9
+LTGrey: #C2BEC2
+Orange: #DB8656
+White: #EEEEDD
+Lt Orange: rgb(218, 156, 120) */
+
+@font-face {
+  font-family: 'Blacker-Text-Heavy-trial';
+  src: url('./fonts/Blacker-Text-Heavy-trial.ttf');
+}
+
+
 .App {
   text-align: center;
-  background: white;
-
-  height: 100vh;
-  width: 100vw;
-  
+  font-family: Verdana;
+  color: rgb(25, 26, 52);
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .header {
-  height: 75px;
-  width: 100%;
-  background-color: white;
-  color: black;
-  border: solid black 1px;
   display: flex;
-  justify-content: center;
-  align-items: stretch;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px;
+  height: 15px;
+  width: 100%;
+  background-color: rgb(25, 26, 52);
+  color: #EEEEDD;
   position: fixed;
+  font-family: 'Blacker-Text-Heavy-trial';
+  list-style: none;
+}
+
+.header > h1 {
+  flex-grow: 14;
+  text-align: left;
+  letter-spacing: .09em;
+}
+
+.manager-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  text-align: right;
+  padding: 0px 20px;
+  list-style: none;
+  font-family: Verdana;
+  font-size: 20px;
+}
+
+.manager-buttons a {
+  margin: 20px;
+  transition: all 0.3 ease 0s;
+  color: #EEEEDD;
+  text-decoration: none;
+}
+
+.manager-buttons a:hover {
+  transition: all 0.3 ease 0s;
+  color: rgb(218, 156, 120);
+}
+
+.user-div {
+  width: 35%;
+  max-width: 1200px;
+  margin: 125px auto;
+}
+
+.user-outer {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-outer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.user-outer li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.user-outer > li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.user-outer li label,
+.user-outer li p {
+  padding: 8px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.user-outer > li > label
+{ 
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.user-outer > li > label + *,
+.user-inner {
+  flex: 1 0 220px;
+}
+
+.user-outer li input {
+  padding: 15px;
+  border: none;
+}
+
+.user-outer li button {
+  margin-left: auto;
+  padding: 8px 16px;
+  border: none;
+  background: #DB8656;
+  color: #f2f2f2;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  border-radius: 2px;
+  font-size: 18px;
+}
+
+.user-outer li button:hover {
+  background: rgb(218, 156, 120); 
+}
+
+.user-auth > p > a {
+  color: #DB8656;
+}
+
+.user-auth {
+  background: #C2BEC2;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .MainContainer {
@@ -26,12 +147,7 @@
   flex-direction: row;
   width: 100%;
   margin-top: 75px;
-}
-
-.Feed {
-  flex: 2;
-  order: 2;
-  border: 1px solid black;
+  background: #EEEEDD;
 }
 
 .CommandCenter {
@@ -39,17 +155,101 @@
   order: 1;
   height: 100%;
   flex-direction: row;
-  border: 1px solid black;
 }
 
 .check-in-container {
+  margin: 20px;
   flex-direction: row;
-  /* height: 30vh; */
-  border: 1px solid black;
+  background: rgb(156, 159, 171);
+  align-items: flex-start;
 }
 
-.check-in-container > h1 {
-  border: 1px solid black;
+/* .command-buttons {
+  display: flex;
+  align-items: 
+} */
+
+.check-in-container > p {
+  background: rgb(25, 26, 52);
+  color: #EEEEDD;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.check-out  > button {
+  height: 100px;
+  width: 100px;
+  font-size: 20px;
+  margin: 7px;
+  background: rgb(74, 74, 103);
+  color: #EEEEDD;
+  border: none;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.check-out  > button:hover {
+  background: #DB8656; 
+}
+
+.check-safety > button {
+  height: 100px;
+  width: 100px;
+  font-size: 20px;
+  margin: 7px;
+  background: rgb(74, 74, 103);
+  color: #EEEEDD;
+  border: none;
+  border-radius: 4px;
+  flex: 1;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.check-safety  > button:hover {
+  background: #DB8656; 
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  order: 2;
+  margin: 20px;
+  background: #C2BEC2;
+}
+
+.feed-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-header > p {
+  margin: 0;
+  background: rgb(25, 26, 52);
+  color: #EEEEDD;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.feed-header > button {
+  background: #DB8656;
+  color:  #EEEEDD;
+  margin: 10px;
+  font-size: 20px;
+  width: 200px;
+  border-radius: 4px;
+  border: none;
+  right: 0%;
+  
 }
 
 .modal {
@@ -90,11 +290,6 @@
   position: relative;
 }
 
-input[type=text]:focus {
-  background-color: rgb(142, 204, 225);
-  border: none;
-}
-
 label {
   font-size: 20px;
   padding: 10px;
@@ -104,7 +299,6 @@ label {
 .post-form > div > input {
   border-radius: 4px;
   border: lightgray 2px solid;
-  /* background-color: rgb(51, 81, 91)k; */
   padding: 5px;
   width: 75%;
   height: 50%;
@@ -124,51 +318,27 @@ label {
   padding-right: 4px;
 }   
 
-button {
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  font-size: 18px;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  border: white solid 1px;
-  margin: 5px;
-  border-radius: 10px;
-  z-index: 3
-}
-
-.feed-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .post-card {
   width: 90%;
-  border: 2px grey solid;
   margin: 20px;
+  background: #EEEEDD;
+  padding-bottom: 20px;
 }
 
-.post-card > h1 {
-  background-color: white;
-  color: black;
-  border: solid black 1px;
+.post-card > h4 {
+  background-color: rgb(25, 26, 52);
+  color: #EEEEDD;
   top: 0px;
+  padding: 10px;
+  font-size: 24px;
+  letter-spacing: .09em;
 }
 
-.log-out {
-  position: fixed;
-  top: 1%;
-  right: 1%;
+.post-card > p {
+  text-align: left;
+  margin: 5px 20px 5px 20px;
 }
 
-button:hover {
-  background: white;
-  border: solid black 1px;
-  color: black;
-  font-style: bold;
-}
 /* .announcement {
   width: 80%;
   border: 1px grey, solid;
@@ -183,57 +353,60 @@ button:hover {
 .shout_out {
   width: 80%;
   border: 1px grey, solid;
-}
+} */
 
 .urgent_alert {
   background: red;
-} */
-
-.location-feed {
-  border: black solid 1px;
 }
 
-.location-feed > h1{
-  background: white;
-  color: black;
-  border: black solid 1px;
-  height: 8%;
-  width: 100%;
-  /* position: relative; */
+.location-feed {
+  background: rgb(156, 159, 171);
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
 
+.location-feed > p {
+  margin: 0;
+  background: rgb(25, 26, 52);
+  color: #EEEEDD;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.location-feed > ul {
+  margin: 0;
+  padding: 0;
 }
 
 .location-card {
   width: 90%;
-  border: 2px grey solid;
+  background: #EEEEDD;
   margin: 20px;
+  display: flex;
+}
+
+.location-icon {
+  flex: 1;
+  padding-top: 3px;
+  margin: 0;
+}
+
+.location-text {
+  flex: 12;
+}
+
+.time {
+  color: slategray;
+  font-size: 12px;
 }
 
 :disabled {
   background-color: lightgrey;
   color: grey;
-}
-:disabled:hover {
-  background-color: lightgrey;
-  color: grey;
-  border: solid 1px lightgrey;
-}
-
-.user-auth {
-  margin-top: 75px; 
-}
-
-.logout {
-  top: 0px;
-  right: 0px;
-  background: white;
-  color: black;
-  border: 1px black solid;
-}
-
-a {
-  color: blue;
-  text-decoration: none;
 }
 
 .safety-concern-banner {
@@ -251,7 +424,3 @@ a {
   width: 20px;
 }
 
-.check-out > button {
-  height: 100px;
-  width: 100px;
-}

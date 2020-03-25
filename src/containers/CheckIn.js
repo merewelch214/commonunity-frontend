@@ -107,7 +107,7 @@ class CheckIn extends React.Component {
                     Facility</button>
                 <button name='Touchdown Space' onClick={this.checkIn}>
                     <FontAwesomeIcon icon={faLaptop} color='grey' /><br />
-                    Touchdown Space</button>
+                    TD Space</button>
                 <button name='Other' onClick={this.checkIn}>
                     <FontAwesomeIcon icon={faSearchLocation} color='grey' /><br />
                     Other</button>
@@ -123,9 +123,11 @@ class CheckIn extends React.Component {
 
         return (
             <div className='check-in-container'>  
-                <h1>Your Location</h1>
-                {this.state.location ? checkOutButtons : checkInButtons}
-                {this.state.lat && <SafetyConcernBanner />}
+                <p>Your Location</p>
+                <div className='command-buttons'>
+                    {this.state.location ? checkOutButtons : checkInButtons}
+                    {this.state.lat && <SafetyConcernBanner />}
+                </div>
             </div>
         )
     }

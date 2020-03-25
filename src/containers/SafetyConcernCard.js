@@ -72,7 +72,7 @@ class SafetyConcernCard extends React.Component {
 
         return ( 
             <div className='post-card'>
-                { resolved ? <h1>Resolved Safety Concern</h1> : <h1><b>{this.props.concern.user.name}</b>: Safety Concern</h1> }
+                { resolved ? <h4>Resolved Safety Concern</h4> : <h4><b>{this.props.concern.user.name}</b>: Safety Concern</h4> }
                 <p><b>{this.props.concern.user.name}</b> logged a safety concern on <Moment format="LLL">{this.props.concern.created_at}</Moment>.</p>
                 { resolved ? null : googleMap }
                 { resolved ? resolvedDetails : resolutionForm }

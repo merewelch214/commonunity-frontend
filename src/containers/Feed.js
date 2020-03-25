@@ -28,15 +28,18 @@ class Feed extends React.Component {
         const sortedPosts = [...this.state.posts].sort((a, b) => b.id - a.id)
 
         return (
-            <div className='Feed'>
-                {this.props.currentUser.is_manager 
-                    && 
-                <button id='new-post' onClick={this.toggleModal}>New Announcement</button>}
+            <div className='feed'>
+                <div className='feed-header'>
+                    <p> Announcements </p>
+                    {this.props.currentUser.is_manager 
+                        && 
+                    <button onClick={this.toggleModal}>New Announcement</button>}
+                </div>
                 <Modal show={this.state.showNewPostModal} 
                     handleClose={this.toggleModal} 
                     currentUser={this.props.currentUser} 
                     shareRecentPosts={this.getRecentPosts}/> 
-                <div id='feedContainer'> 
+                <div className='feed-container'> 
                     {sortedPosts.map(post => <Post {...post} key={post.id}/>)}
                 </div>
             </div>  
