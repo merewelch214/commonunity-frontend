@@ -1,6 +1,6 @@
 import React from 'react';
-import CheckIn from './CheckIn';
-import LocationFeed from './LocationFeed';
+import CheckIn from '../containers/CheckIn';
+import LocationFeed from '../containers/LocationFeed';
 
 const CommandCenter = (props) => {
 return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import SafetyConcernBanner from './SafetyConcernBanner';
+import SafetyConcernBanner from '../components/SafetyConcernBanner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHospital } from '@fortawesome/free-solid-svg-icons'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
@@ -100,16 +100,16 @@ class CheckIn extends React.Component {
         const checkInButtons =
             <div className='check-out'>
                 <button name='Member Visit' onClick={this.checkIn}> 
-                <FontAwesomeIcon icon={faHome} color='grey' /> <br />
+                <FontAwesomeIcon icon={faHome} color='#EEEEDD' /> <br />
                 Member Visit</button>
                 <button name='Facility' onClick={this.checkIn}> 
-                    <FontAwesomeIcon icon={faHospital} color='grey' /><br />
+                    <FontAwesomeIcon icon={faHospital} color='#EEEEDD' /><br />
                     Facility</button>
                 <button name='Touchdown Space' onClick={this.checkIn}>
-                    <FontAwesomeIcon icon={faLaptop} color='grey' /><br />
+                    <FontAwesomeIcon icon={faLaptop} color='#EEEEDD' /><br />
                     TD Space</button>
                 <button name='Other' onClick={this.checkIn}>
-                    <FontAwesomeIcon icon={faSearchLocation} color='grey' /><br />
+                    <FontAwesomeIcon icon={faSearchLocation} color='#EEEEDD' /><br />
                     Other</button>
             </div>
             
