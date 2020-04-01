@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter, Route, Switch } from 'react-router';
-import Login from './containers/Login'
-import SignUp from './containers/SignUp'
-import MainContainer from './containers/MainContainer'
 import './App.css';
-import Header from './containers/Header';
+import Header from './components/Header';
+import MainContainer from './components/MainContainer';
+import Login from './containers/Login';
+import SignUp from './containers/SignUp';
 
 class App extends React.Component {  
   state = {
@@ -20,7 +20,8 @@ class App extends React.Component {
 
   logOut = () => {
     this.setState({
-    currentUser: ''
+    currentUser: '',
+    currentView: 'posts'
     }, () => {this.props.history.push('/login')}
     )
   }
@@ -40,14 +41,23 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header currentUser={this.state.currentUser} logOut={this.logOut} showFeed={this.showFeed} showSafety={this.showSafety}/>
+        <Header 
+          currentUser={this.state.currentUser} 
+          logOut={this.logOut} 
+          showFeed={this.showFeed} 
+          showSafety={this.showSafety}/>
         <Switch>
           <Route path='/signup' render={() => <SignUp setUser={this.setUser} />}/>
           <Route path='/login' render={() => <Login setUser={this.setUser} />}/>
-          <Route path='/feed' render={() => <MainContainer currentUser={this.state.currentUser} currentView={this.state.currentView}/>}/>
-          <Route path='/safety_concerns' render= {() => <MainContainer currentUser={this.state.currentUser} currentView={this.state.currentView}/>}/>}/>
+          <Route path='/feed' render={() => 
+            <MainContainer 
+              currentUser={this.state.currentUser} 
+              currentView={this.state.currentView}/>}/>
+          <Route path='/safety_concerns' render= {() => 
+            <MainContainer 
+              currentUser={this.state.currentUser} 
+              currentView={this.state.currentView}/>}/>}/>
           <Route path='/' render={() =>  <Login setUser={this.setUser} />}/>
-          <Route component={Error} />
         </Switch>
       </div>
     )
