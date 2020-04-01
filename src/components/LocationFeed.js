@@ -1,5 +1,5 @@
 import React from 'react';
-import LocationCard from './LocationCard';
+import LocationCard from '../components/LocationCard';
 import { ActionCable } from 'actioncable-client-react';
 class LocationFeed extends React.Component {
     
@@ -62,3 +62,6 @@ class LocationFeed extends React.Component {
 }
 
 export default LocationFeed;
+
+
+

@@ -1,7 +1,7 @@
 import React from 'react';
-import Feed from '../containers/Feed';
-import CommandCenter from './CommandCenter';
-import SafetyContainer from '../containers/SafetyContainer';
+import Feed from './containers/Feed';
+import CommandCenter from './components/CommandCenter';
+import SafetyContainer from './containers/SafetyContainer';
 
 const MainContainer = props => {
     return (
