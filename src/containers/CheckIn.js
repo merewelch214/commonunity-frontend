@@ -1,12 +1,7 @@
 import React from 'react';
 import SafetyConcernBanner from '../components/SafetyConcernBanner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHospital } from '@fortawesome/free-solid-svg-icons'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
-import { faLaptop } from '@fortawesome/free-solid-svg-icons'
-import { faSearchLocation } from '@fortawesome/free-solid-svg-icons'
-import { faLifeRing } from '@fortawesome/free-solid-svg-icons'
-
+import { faHospital, faHome, faLaptop, faSearchLocation, faLifeRing } from '@fortawesome/free-solid-svg-icons'
 
 class CheckIn extends React.Component {
     
@@ -16,8 +11,6 @@ class CheckIn extends React.Component {
         lat: '',
         long: ''
     }
-
-
 
     componentDidMount() {
         Promise.all([

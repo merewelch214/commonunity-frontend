@@ -450,3 +450,36 @@ input type:text-area {
   padding: 5px;
   text-align: center;
 }
+
+.post-manager {
+  background: #70737C;
+  font-size: 10px;
+  margin: 5px;
+}
+
+.post-manager:hover {
+  background: #94A1A9; 
+}
+
+.post-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.post-info {
+  flex: 1;
+}
+
+.post-mgmt-buttons {
+  flex: 1;
+  text-align: right;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.post-info > p {
+  margin-bottom: 0;
+  margin-left: 20px;
+  text-align: left;
+}
