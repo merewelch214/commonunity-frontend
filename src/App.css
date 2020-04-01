@@ -1,11 +1,3 @@
-/* Navy: rgb(25, 26, 52)
-BlueGrey: #70737C
-LtBlue: #94A1A9
-LTGrey: #C2BEC2
-Orange: #DB8656
-White: #EEEEDD
-Lt Orange: rgb(218, 156, 120) */
-
 @font-face {
   font-family: 'Blacker-Text-Heavy-trial';
   src: url('./fonts/Blacker-Text-Heavy-trial.ttf');
@@ -338,12 +330,10 @@ label {
   border: 1px grey, solid;
   
 }
-
 .new_feature {
   width: 80%;
   border: 1px grey, solid;
 }
-
 .shout_out {
   width: 80%;
   border: 1px grey, solid;
@@ -449,4 +439,37 @@ input type:text-area {
   height: 24px;
   padding: 5px;
   text-align: center;
+}
+
+.post-manager {
+  background: #70737C;
+  font-size: 10px;
+  margin: 5px;
+}
+
+.post-manager:hover {
+  background: #94A1A9; 
+}
+
+.post-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.post-info {
+  flex: 1;
+}
+
+.post-mgmt-buttons {
+  flex: 1;
+  text-align: right;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.post-info > p {
+  margin-bottom: 0;
+  margin-left: 20px;
+  text-align: left;
 }

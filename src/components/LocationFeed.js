@@ -1,8 +1,6 @@
 import React from 'react';
 import LocationCard from './LocationCard';
 import { ActionCable } from 'actioncable-client-react';
-// import FeedDisplay from './FeedDisplay';
-
 class LocationFeed extends React.Component {
     
     state = {
@@ -19,8 +17,6 @@ class LocationFeed extends React.Component {
         const check_in_object = data.check_in.data
         const id = parseInt(check_in_object.id)
         const updatedCheckIn = this.state.check_ins.filter(check_in => check_in.id === id)
-        console.log('outside if', updatedCheckIn)
-        
         // if there is already a check in object with this id, do not create a new one, update old
         if (updatedCheckIn.length > 0) {
             updatedCheckIn[0].checked_in_at = new Date()
@@ -28,12 +24,15 @@ class LocationFeed extends React.Component {
             let copiedState = this.state.check_ins
             const findMatch = (check_in) => check_in.id === updatedCheckIn[0].id
             const index = this.state.check_ins.findIndex(findMatch)
-            copiedState[index] = updatedCheckIn[0] 
+            copiedState.splice(index,1)
+            copiedState.unshift(updatedCheckIn[0])
             this.setState({
                 check_ins: copiedState 
             })
         } else {
-        // if there is not a check in object with this id, create a new one
+        // if there is no check in object with this id, create a new one
+            // find the users old check in and replace it in state with the new check in
+            let copiedState = this.state.check_ins            
             const new_check_in = {
                 id: parseInt(check_in_object.id), 
                 user_id: check_in_object.attributes.user_id,
@@ -41,9 +40,12 @@ class LocationFeed extends React.Component {
                 created_at: check_in_object.attributes.created_at,
                 checked_in_at: check_in_object.attributes.checked_in_at,
                 user: {name: check_in_object.attributes.user.name}}
-
-            this.setState({check_ins: [...this.state.check_ins, new_check_in]})
-        
+            let updatedState = copiedState.filter(check_in => check_in.user_id !== new_check_in.user_id)
+            updatedState.unshift(new_check_in)
+            this.setState({
+                 check_ins: updatedState 
+            }) 
+                   
     }}
     
     render() {

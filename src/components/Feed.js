@@ -24,6 +24,10 @@ class Feed extends React.Component {
         })
     }
 
+    removePost = (oldPost) => {
+        this.setState({ posts: this.state.posts.filter(post => post.id !== oldPost) })
+    } 
+
     render() {
         const sortedPosts = [...this.state.posts].sort((a, b) => b.id - a.id)
 
@@ -40,7 +44,11 @@ class Feed extends React.Component {
                     currentUser={this.props.currentUser} 
                     shareRecentPosts={this.getRecentPosts}/> 
                 <div className='feed-container'> 
-                    {sortedPosts.map(post => <Post {...post} key={post.id}/>)}
+                    {sortedPosts.map(post => <Post 
+                        {...post} 
+                        key={post.id} 
+                        currentUser={this.props.currentUser}
+                        removePost={this.removePost}/>)}
                 </div>
             </div>  
         )
