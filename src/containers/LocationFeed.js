@@ -1,8 +1,6 @@
 import React from 'react';
 import LocationCard from '../components/LocationCard';
 import { ActionCable } from 'actioncable-client-react';
-
-
 class LocationFeed extends React.Component {
     
     state = {
