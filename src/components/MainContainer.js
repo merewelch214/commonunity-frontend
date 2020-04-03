@@ -1,13 +1,13 @@
 import React from 'react';
-import Feed from '../containers/Feed';
+import Feed from './Feed';
 import CommandCenter from './CommandCenter';
-import SafetyContainer from '../containers/SafetyContainer';
+import SafetyContainer from './SafetyContainer';
 
 const MainContainer = props => {
     return (
         <div className="MainContainer">
-            {props.currentView === 'posts' ? <Feed currentUser={props.currentUser}/> : <SafetyContainer currentUser={props.currentUser} /> }
-            <CommandCenter currentUser={props.currentUser}/>
+            {props.currentView === 'posts' ? <Feed currentUser={props.currentUser} adapter={props.adapter}/> : <SafetyContainer currentUser={props.currentUser} adapter={props.adapter} /> }
+            <CommandCenter currentUser={props.currentUser} adapter={props.adapter}/>
         </div>
     );
 }

@@ -64,8 +64,7 @@ class Post extends React.Component {
             })
         })
         .then(resp=>resp.json())
-        .then(data=>this.setState({comments: [...this.state.comments, data]}))
-        this.setState({commentText: ''})
+        .then(data=> this.setState({comments: [...this.state.comments, data], commentText: ''}))
     }
 
 
@@ -81,12 +80,12 @@ class Post extends React.Component {
                     <p>{this.props.summary}</p><br/>
                     <div className='post-info-container'>
                         <div className='post-info'>
-                            <p>{this.props.category}</p>
                             <p className='time'><Moment format="LLL">{this.props.created_at}</Moment></p>
+                            {this.state.likes.length} {this.state.likes.length === 1 ? 'like' : 'likes'}
+                            <Like currentUser={this.props.currentUser} removeLike={this.removeLike} addLike={this.addLike} likes={this.state.likes}/>
                         </div>
                         <div className='post-data'>
                             <p>{this.state.comments.length} {this.state.comments.length === 1 ? 'comment' : 'comments'}</p>
-                            <p>{this.state.likes.length} {this.state.likes.length === 1 ? 'like' : 'likes'}</p>
                         </div>
                         <form onSubmit={(e)=>this.addComment(e, this.state.commentText)}>
                             <input type='text-area' onChange={this.handleChange} />
@@ -94,9 +93,8 @@ class Post extends React.Component {
                         </form>
                         <div className='post-mgmt-buttons'>
                             {this.props.currentUser.is_manager && <button className='post-manager' onClick={this.deletePost}> Delete </button>}
-                            {this.state.comments.map(comment=> <Comment key={comment.id} {...comment} />)}
-                            <Like currentUser={this.props.currentUser} removeLike={this.removeLike} addLike={this.addLike} likes={this.state.likes}/>
                         </div>
+                        {this.state.comments.map(comment=> <Comment key={comment.id} {...comment} />)}
                     </div>
                 </div>
             </div>

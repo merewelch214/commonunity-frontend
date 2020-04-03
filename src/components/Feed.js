@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from '../components/Post';
 import Modal from './Modal';
+import APICommunicator from '../services/adapter';
 
 class Feed extends React.Component {
     state = {
@@ -9,9 +10,12 @@ class Feed extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/posts`)
-        .then(resp => resp.json())
-        .then(data => this.setState({posts: data}))
+        const adapter = new APICommunicator();
+        adapter.getPosts()
+        .then(posts=> this.setState({ posts }))
+        // fetch(`http://localhost:3000/posts`)
+        // .then(resp => resp.json())
+        // .then(data => this.setState({posts: data}))
     }
 
     toggleModal = () => {

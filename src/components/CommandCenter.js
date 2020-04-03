@@ -1,11 +1,11 @@
 import React from 'react';
-import CheckIn from './CheckIn';
+import CheckInContainer from './CheckInContainer';
 import LocationFeed from './LocationFeed';
 
 const CommandCenter = (props) => {
 return (
     <div className='CommandCenter'>
-        {!props.currentUser.is_manager && <CheckIn currentUser={props.currentUser} />}
+        {!props.currentUser.is_manager && <CheckInContainer currentUser={props.currentUser} />}
         <LocationFeed />
     </div>
 )

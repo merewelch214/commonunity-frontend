@@ -1,5 +1,6 @@
 import React from 'react';
 import SafetyConcernCard from './SafetyConcernCard';
+import APICommunicator from '../services/adapter';
 
 class SafetyContainer extends React.Component {
     state = {
@@ -7,8 +8,8 @@ class SafetyContainer extends React.Component {
     }
     
     componentDidMount() {
-        fetch(`http://localhost:3000/safety_concerns`)
-        .then(resp=>resp.json())
+        const adapter = new APICommunicator();
+        adapter.getSafetyConcerns()
         .then(data=>this.setState({safety_concerns: data})
         )
     }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import APICommunicator from '../services/adapter';
+
 
 class Login extends React.Component {
 
@@ -8,26 +10,17 @@ class Login extends React.Component {
         password: ''
     }
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                name: this.state.name,
-                password: this.state.password
-            })
-        })
-        .then(resp=>resp.json())
-        .then(response => {
-            if (response.errors)
-                {alert(response.errors)
+        const adapter = new APICommunicator(); 
+        adapter.loginUser(this.state)
+        .then(data => { 
+            if (data.errors) {
+              alert(data.errors);
             } else {
-                this.props.setUser(response)}
-        })
+              this.props.setUser(data)
+            }
+        });
     }
 
     handleChange = (e) => {

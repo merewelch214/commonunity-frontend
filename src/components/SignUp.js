@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import APICommunicator from '../services/adapter';
+
 
 class SignUp extends React.Component {
 
@@ -15,18 +17,15 @@ class SignUp extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault()
+        
         if (this.state.password !== this.state.password_confirmation) {
             alert('Passwords must match') }
         else {
-        fetch('http://localhost:3000/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'},
-            body: JSON.stringify(this.state)
-        })
-        .then(resp => resp.json())
-        .then(user => this.props.setUser(user))
+            const adapter = new APICommunicator();
+            const copiedState = this.state
+            const { password_confirmation, ...newUser } = copiedState
+            adapter.createUser(newUser)
+            .then(user => this.props.setUser(user))
     }}
 
     handleChange = e => {
@@ -43,7 +42,7 @@ class SignUp extends React.Component {
             <div className='user-div'>
                 <div className='user-auth'>
                     <form onSubmit={this.handleSubmit}>
-                    <ul class='user-outer'>
+                    <ul className='user-outer'>
                         <li>
                             <label name='name'>Username*</label> 
                             <input type='text' name='name' value={this.state.name} onChange={this.handleChange}/>

@@ -5,8 +5,8 @@ import SignUp from './components/SignUp'
 import MainContainer from './components/MainContainer'
 import './App.css';
 import Header from './components/Header';
-
 class App extends React.Component {  
+  
   state = {
     currentUser: '',
     currentView: 'posts' 
@@ -37,8 +37,9 @@ class App extends React.Component {
       currentView: 'safety'
     })
   }
-  
+
   render() {
+
     return (
       <div className="App">
         <Header 
@@ -56,7 +57,7 @@ class App extends React.Component {
           <Route path='/safety_concerns' render= {() => 
             <MainContainer 
               currentUser={this.state.currentUser} 
-              currentView={this.state.currentView}/>}/>}/>
+              currentView={this.state.currentView}/>}/>
           <Route path='/' render={() =>  <Login setUser={this.setUser} />}/>
         </Switch>
       </div>
