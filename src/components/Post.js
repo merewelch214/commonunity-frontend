@@ -14,7 +14,8 @@ class Post extends React.Component {
     componentDidMount() {
         this.setState({
             likes: this.props.likes,
-            comments: this.props.comments
+            comments: this.props.comments,
+            currentUser: this.props.currentUser
         })
     }
 
@@ -64,7 +65,7 @@ class Post extends React.Component {
             })
         })
         .then(resp=>resp.json())
-        .then(data=> this.setState({comments: [...this.state.comments, data], commentText: ''}))
+        .then(data=> this.setState({comments: [...this.state.comments, data], commentText: '' }))
     }
 
 
@@ -84,14 +85,14 @@ class Post extends React.Component {
                     <button className='post-manager' onSubmit={this.addComment}>Add Comment</button>
                 </form>
             </div>
-
+        
         return ( 
             <div id={this.props.category}>
                 <div className='post-card'>
                     <h4 className='title'>{this.props.title} </h4>
                     <p>{this.props.summary}</p><br/>
                     <div className='admin'>
-                        <span className='time'> Posted by {this.props.user.name ? this.props.user.name :            this.props.currentUser.name}</span>
+                        <span className='time'> Posted by {this.props.user.name ? this.props.user.name : this.props.currentUser.name}</span>
                         <Moment format="LLL" className='time'>{this.props.created_at}</Moment> 
                         <div className='post-mgmt-buttons'>
                             {this.props.currentUser.is_manager && <button className='delete' onClick={this.deletePost}> Delete </button>}
@@ -104,14 +105,20 @@ class Post extends React.Component {
                                 {this.state.comments.length} {this.state.comments.length === 1 ? 'comment' : 'comments'}
                             </div>
                             <div className='post-data'>   
-                                <Like currentUser={this.props.currentUser} removeLike={this.removeLike} addLike={this.addLike} likes={this.state.likes}/>
+                                <Like currentUser={this.props.currentUser} 
+                                    removeLike={this.removeLike} 
+                                    addLike={this.addLike} 
+                                    likes={this.state.likes}/>
                                 <button className='post-manager' onClick={this.toggleForm}>Comment</button>
                             </div>
                         </div>
                         <div className='comment-form-container'>
                            {this.state.formToggle && commentForm}
                         </div>
-                        {this.state.comments.map(comment=> <Comment key={comment.id} {...comment} />)}
+                        {this.state.comments.map(comment=> <Comment 
+                            key={comment.id} 
+                            {...comment} 
+                            currentUser={this.props.currentUser} />)}
 
                         
                     </div>

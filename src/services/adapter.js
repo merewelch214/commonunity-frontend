@@ -26,6 +26,10 @@ class APICommunicator {
         return response.json();
     }
 
+    getPosts() {
+      return fetch(`${this.endpoint}/posts`).then(this.parseData);
+  }
+
     createUser(user) {
         return fetch(`${this.endpoint}/signup`, this.fetchOptions('POST', { user }))
         .then(this.parseData)
@@ -34,10 +38,6 @@ class APICommunicator {
     loginUser(user) {
         return fetch(`${this.endpoint}/login`, this.fetchOptions('POST', { user }))
         .then(this.parseData)
-    }
-
-    getPosts() {
-        return fetch(`${this.endpoint}/posts`).then(this.parseData);
     }
 
     getSafetyConcerns() {

@@ -69,7 +69,6 @@ class CheckInContainer extends React.Component {
                 'Accept': 'application/json'
             }
         })
-
     }
 
     success = (pos) => {
