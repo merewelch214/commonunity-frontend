@@ -1,8 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
-import Like from './Like'
-import Comment from './Comment'
-
+import Comment from './Comment';
+import Like from './Like';
 class Post extends React.Component {
     
     state = {

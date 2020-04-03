@@ -1,6 +1,6 @@
 import React from 'react';
-import Feed from './Feed';
 import CommandCenter from './CommandCenter';
+import Feed from './Feed';
 import SafetyContainer from './SafetyContainer';
 
 const MainContainer = props => {

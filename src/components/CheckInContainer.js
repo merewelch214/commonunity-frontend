@@ -35,9 +35,7 @@ class CheckInContainer extends React.Component {
 
     
     checkIn = e => {
-        console.dir(e.target)
         const location = e.target.name
-        console.log(location)
         this.setState({ location })
         
         // const adapter = new APICommunicator();
@@ -98,8 +96,9 @@ class CheckInContainer extends React.Component {
     logSafetyConcern = () => {
         navigator.geolocation.getCurrentPosition(this.success, this.error)
     }
-
+    
     render() {
+        console.log('check in cont state', this.state)
         return (
             <div className='check-in-container'>  
                 <p>Your Location</p>

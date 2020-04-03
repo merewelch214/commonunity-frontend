@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter, Route, Switch } from 'react-router';
-import Login from './components/Login'
-import SignUp from './components/SignUp'
-import MainContainer from './components/MainContainer'
-import './App.css';
 import Header from './components/Header';
+import MainContainer from './components/MainContainer';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import './App.css';
 class App extends React.Component {  
   
   state = {

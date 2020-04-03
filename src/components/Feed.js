@@ -1,6 +1,6 @@
 import React from 'react';
-import Post from './Post';
 import Modal from './Modal';
+import Post from './Post';
 import APICommunicator from '../services/adapter';
 
 class Feed extends React.Component {
