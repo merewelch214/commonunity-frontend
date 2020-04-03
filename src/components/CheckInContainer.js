@@ -1,14 +1,13 @@
 import React from 'react';
+import CheckInButtons from './CheckInButtons';
+import CheckOutButtons from './CheckOutButtons';
 import SafetyConcernBanner from './SafetyConcernBanner';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHospital,faHome,faLaptop,faSearchLocation,faLifeRing } from '@fortawesome/free-solid-svg-icons'
 // import APICommunicator from '../services/adapter';
 
 class CheckInContainer extends React.Component {
     
     state = {
         location: '',
-        prevLocation: '',
         lat: '',
         long: ''
     }
@@ -36,7 +35,9 @@ class CheckInContainer extends React.Component {
 
     
     checkIn = e => {
+        console.dir(e.target)
         const location = e.target.name
+        console.log(location)
         this.setState({ location })
         
         // const adapter = new APICommunicator();
@@ -99,38 +100,11 @@ class CheckInContainer extends React.Component {
     }
 
     render() {
-        const checkInButtons =
-            <div className='check-out'>
-                <button name='Member Visit' onClick={this.checkIn}> 
-                <FontAwesomeIcon icon={faHome} color='#EEEEDD' /> <br />
-                Member Visit</button>
-                <button name='Facility' onClick={this.checkIn}> 
-                    <FontAwesomeIcon icon={faHospital} color='#EEEEDD' /><br />
-                    Facility</button>
-                <button name='Touchdown Space' onClick={this.checkIn}>
-                    <FontAwesomeIcon icon={faLaptop} color='#EEEEDD' /><br />
-                    TD Space</button>
-                <button name='Other' onClick={this.checkIn}>
-                    <FontAwesomeIcon icon={faSearchLocation} color='#EEEEDD' /><br />
-                    Other</button>
-            </div>
-            
-        const checkOutButtons = 
-            <div className='check-safety'>
-                <button name='' onClick={this.logSafetyConcern}>
-                    <FontAwesomeIcon icon={faLifeRing} color='red' />
-                    Log Safety Concern</button>
-                <button name=''
-                    onClick={this.checkOut}>Checking out of <b> {this.state.location} </b> 
-                </button>
-            </div>
-
-        console.log(this.state.location)
         return (
             <div className='check-in-container'>  
                 <p>Your Location</p>
                 <div className='command-buttons'>
-                    {this.state.location ? checkOutButtons : checkInButtons}
+                    {this.state.location ? <CheckOutButtons checkOut={this.checkOut} location={this.state.location} /> : < CheckInButtons checkIn={this.checkIn}/>}
                     {this.state.lat && <SafetyConcernBanner />}
                 </div>
             </div>
