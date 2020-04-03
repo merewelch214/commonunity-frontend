@@ -7,7 +7,8 @@ class Post extends React.Component {
     state = {
         likes: [],
         comments: [],
-        commentText: ''
+        commentText: '',
+        formToggle: false,
     }
 
     componentDidMount() {
@@ -71,29 +72,48 @@ class Post extends React.Component {
         this.setState({commentText: e.target.value})
     }
 
+    toggleForm = () => {
+        this.setState({ formToggle: !this.state.formToggle })
+    }
     render() {
+        
+        const commentForm = 
+            <div className='comment-form'>
+                <form onSubmit={(e)=>this.addComment(e, this.state.commentText)}>
+                    <input type='text-area' onChange={this.handleChange} />
+                    <button className='post-manager' onSubmit={this.addComment}>Add Comment</button>
+                </form>
+            </div>
+
         return ( 
             <div id={this.props.category}>
                 <div className='post-card'>
                     <h4 className='title'>{this.props.title} </h4>
                     <p>{this.props.summary}</p><br/>
-                    <div className='post-info-container'>
-                        <div className='post-info'>
-                            <p className='time'><Moment format="LLL">{this.props.created_at}</Moment></p>
-                            {this.state.likes.length} {this.state.likes.length === 1 ? 'like' : 'likes'}
-                            <Like currentUser={this.props.currentUser} removeLike={this.removeLike} addLike={this.addLike} likes={this.state.likes}/>
-                        </div>
-                        <div className='post-data'>
-                            <p>{this.state.comments.length} {this.state.comments.length === 1 ? 'comment' : 'comments'}</p>
-                        </div>
-                        <form onSubmit={(e)=>this.addComment(e, this.state.commentText)}>
-                            <input type='text-area' onChange={this.handleChange} />
-                            <button className='post-manager' onSubmit={this.handleSubmit}>Comment</button>
-                        </form>
+                    <div className='admin'>
+                        <span className='time'> Posted by {this.props.user.name ? this.props.user.name :            this.props.currentUser.name}</span>
+                        <Moment format="LLL" className='time'>{this.props.created_at}</Moment> 
                         <div className='post-mgmt-buttons'>
-                            {this.props.currentUser.is_manager && <button className='post-manager' onClick={this.deletePost}> Delete </button>}
+                            {this.props.currentUser.is_manager && <button className='delete' onClick={this.deletePost}> Delete </button>}
+                        </div>
+                    </div>
+                    <div className='post-info-container'>
+                        <div className='likes-info'>
+                            <div className='post-info'>
+                                {this.state.likes.length} {this.state.likes.length === 1 ? 'like, ' : 'likes, '} 
+                                {this.state.comments.length} {this.state.comments.length === 1 ? 'comment' : 'comments'}
+                            </div>
+                            <div className='post-data'>   
+                                <Like currentUser={this.props.currentUser} removeLike={this.removeLike} addLike={this.addLike} likes={this.state.likes}/>
+                                <button className='post-manager' onClick={this.toggleForm}>Comment</button>
+                            </div>
+                        </div>
+                        <div className='comment-form-container'>
+                           {this.state.formToggle && commentForm}
                         </div>
                         {this.state.comments.map(comment=> <Comment key={comment.id} {...comment} />)}
+
+                        
                     </div>
                 </div>
             </div>

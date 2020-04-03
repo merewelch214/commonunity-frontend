@@ -45,7 +45,8 @@ class Modal extends React.Component {
             body: JSON.stringify(newPost) 
         })
         .then(resp => resp.json())
-        .then(data => this.props.shareRecentPosts(data)) 
+        .then(data => 
+            this.props.shareRecentPosts(({...data, likes: [], comments: [], user: {name: this.props.currentUser.name}}))) 
         this.clearState()
         this.props.handleClose()
     }

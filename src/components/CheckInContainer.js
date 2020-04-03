@@ -98,7 +98,6 @@ class CheckInContainer extends React.Component {
     }
     
     render() {
-        console.log('check in cont state', this.state)
         return (
             <div className='check-in-container'>  
                 <p>Your Location</p>

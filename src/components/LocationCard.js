@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const LocationFeed = props => {
-    console.log('props for feed', props)
     return (
        <div className='location-card'>
             <div className='location-icon'>

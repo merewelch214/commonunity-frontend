@@ -34,7 +34,6 @@ class Feed extends React.Component {
 
     render() {
         const sortedPosts = [...this.state.posts].sort((a, b) => b.id - a.id)
-
         return (
             <div className='feed'>
                 <div className='feed-header'>
