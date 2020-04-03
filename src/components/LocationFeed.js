@@ -1,5 +1,5 @@
 import React from 'react';
-import LocationCard from '../components/LocationCard';
+import LocationCard from './LocationCard';
 import { ActionCable } from 'actioncable-client-react';
 class LocationFeed extends React.Component {
     
@@ -8,7 +8,7 @@ class LocationFeed extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/check_ins`)
+        fetch(`http://localhost:3000/latest_unique_check_ins`)
         .then(resp=>resp.json())
         .then(check_ins => this.setState({check_ins}))
     }
@@ -17,6 +17,7 @@ class LocationFeed extends React.Component {
         const check_in_object = data.check_in.data
         const id = parseInt(check_in_object.id)
         const updatedCheckIn = this.state.check_ins.filter(check_in => check_in.id === id)
+        
         // if there is already a check in object with this id, do not create a new one, update old
         if (updatedCheckIn.length > 0) {
             updatedCheckIn[0].checked_in_at = new Date()

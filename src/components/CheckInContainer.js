@@ -2,13 +2,13 @@ import React from 'react';
 import SafetyConcernBanner from './SafetyConcernBanner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHospital,faHome,faLaptop,faSearchLocation,faLifeRing } from '@fortawesome/free-solid-svg-icons'
-import APICommunicator from '../services/adapter';
+// import APICommunicator from '../services/adapter';
 
 class CheckInContainer extends React.Component {
     
     state = {
         location: '',
-        location_text: '',
+        prevLocation: '',
         lat: '',
         long: ''
     }
@@ -17,15 +17,13 @@ class CheckInContainer extends React.Component {
         // const adapter = new APICommunicator();
         Promise.all([
             // adapter.getUserCheckIns(this.props.currentUser.id)
-            fetch(`http://localhost:3000/check_ins_by_user_id/${this.props.currentUser.id}`)
+            fetch(`http://localhost:3000/users/${this.props.currentUser.id}/latest_check_in`)
                 .then(resp => resp.json())
                 .then(check_in =>
-                    this.setState({
-                        location: check_in.location,
-                        location_text: check_in.location_text})
+                    this.setState({location: check_in.location})
                 ),
             // adapter.getUserSafetyConcerns(this.props.currentUser.id)
-            fetch(`http://localhost:3000/safety_concerns_by_user_id/${this.props.currentUser.id}`)
+            fetch(`http://localhost:3000/users/${this.props.currentUser.id}/safety_concerns`)
                 .then(resp => resp.json())
                 .then(safety_concern =>
                     this.setState({
@@ -38,9 +36,8 @@ class CheckInContainer extends React.Component {
 
     
     checkIn = e => {
-        this.setState({
-           location: e.target.name  
-        })
+        const location = e.target.name
+        this.setState({ location })
         
         // const adapter = new APICommunicator();
         // const check_in = {
@@ -49,7 +46,8 @@ class CheckInContainer extends React.Component {
         //     location_text: this.state.location_text
         // }
         // adapter.createCheckIn(check_in)
-        fetch(`http://localhost:3000/check_ins`,{
+        
+        fetch(`http://localhost:3000/users/${this.props.currentUser.id}/check_ins`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,16 +55,14 @@ class CheckInContainer extends React.Component {
             },
             body: JSON.stringify({
                 user_id: this.props.currentUser.id,
-                location: e.target.name,
-                location_text: this.state.location_text
+                location: location
             })
         })
     }
 
     checkOut = () => {
-        this.setState({
-            location: '',
-            location_text: ''})
+        this.setState({ location: '' })
+        
         fetch(`http://localhost:3000/check_ins_by_user_id/${this.props.currentUser.id}`, {
             method: 'PATCH',
             headers: {
@@ -74,6 +70,7 @@ class CheckInContainer extends React.Component {
                 'Accept': 'application/json'
             }
         })
+
     }
 
     success = (pos) => {
