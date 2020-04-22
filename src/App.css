@@ -104,13 +104,18 @@
   flex: 1 0 220px;
 }
 
-.user-outer li input,textarea,select {
+.user-outer li input,textarea {
   padding: 15px;
   border: none;
   margin: 2px;
+  width: 275px;
 }
 
-/* .user-outer li  */
+.user-outer li select {
+  width: 150px;
+  padding: 0px;
+}
+
 button {
   margin-left: auto;
   padding: 8px 16px;
@@ -516,4 +521,8 @@ input type:text-area {
   text-align: left;
   font-size: 12px;
   border-radius: 7px;
+}
+
+.notification {
+  color: red;
 }

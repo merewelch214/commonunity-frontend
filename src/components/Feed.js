@@ -13,9 +13,6 @@ class Feed extends React.Component {
         const adapter = new APICommunicator();
         adapter.getPosts()
         .then(posts=> this.setState({ posts }))
-        // fetch(`http://localhost:3000/posts`)
-        // .then(resp => resp.json())
-        // .then(data => this.setState({posts: data}))
     }
 
     toggleModal = () => {

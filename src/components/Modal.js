@@ -70,15 +70,22 @@ class Modal extends React.Component {
                         <ul>
                         <li>
                             <label name='title'>Title</label>
+                        </li>
+                        <li>
                             <input type='text' name='title' value={this.state.title} onChange={this.handleChange}/><br /><br />
                         </li>
                         <li>
                             <label name='summary'>Description</label>
+                        </li>
+                        <li>
                             <textarea name='summary' value={this.state.summary} onChange={this.handleChange} id='description-box' rows={9} cols={50}/> <br/>
                         </li>
                         <li>
                             <label name='category'>Category</label>
+                        </li>
+                        <li>
                             <select name='category' value={this.state.category} onChange={this.handleChange}>
+                                <option disabled default_value=''></option>
                                 <option value='announcement'>Announcement</option>
                                 <option value='new_feature'>New Feature</option>
                                 <option value='shout_out'>Shout Out</option>

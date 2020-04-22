@@ -93,6 +93,7 @@ class CheckInContainer extends React.Component {
     }
        
     logSafetyConcern = () => {
+        console.log('here')
         navigator.geolocation.getCurrentPosition(this.success, this.error)
     }
     
@@ -101,7 +102,7 @@ class CheckInContainer extends React.Component {
             <div className='check-in-container'>  
                 <p>Your Location</p>
                 <div className='command-buttons'>
-                    {this.state.location ? <CheckOutButtons checkOut={this.checkOut} location={this.state.location} /> : < CheckInButtons checkIn={this.checkIn}/>}
+                    {this.state.location ? <CheckOutButtons checkOut={this.checkOut} location={this.state.location} logSafetyConcern={this.logSafetyConcern} /> : < CheckInButtons checkIn={this.checkIn}/>}
                     {this.state.lat && <SafetyConcernBanner />}
                 </div>
             </div>
