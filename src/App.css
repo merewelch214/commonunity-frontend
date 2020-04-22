@@ -526,3 +526,8 @@ input type:text-area {
 .notification {
   color: red;
 }
+
+#resolution form textarea {
+  width: 75%;
+  height: 50px;
+}

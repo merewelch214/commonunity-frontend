@@ -45,7 +45,7 @@ class SafetyConcernCard extends React.Component {
                 <p>Please contact this employee as soon as possible. Resolve the concern once you have ensured their safety.</p>
                 <form onSubmit={this.handleSubmit}> 
                     <p><b>How did you resolve this safety concern?</b></p> 
-                    <textarea rows={4} cols={100} name='resolution_text' value={this.state.resolution_text} onChange={this.handleChange}/>
+                    <textarea name='resolution_text' value={this.state.resolution_text} onChange={this.handleChange}/>
                     <br/>
                     <button type='submit'>Resolve</button>
                 </form>
