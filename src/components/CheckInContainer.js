@@ -1,113 +1,128 @@
-import React from 'react';
-import CheckInButtons from './CheckInButtons';
-import CheckOutButtons from './CheckOutButtons';
-import SafetyConcernBanner from './SafetyConcernBanner';
+import React, { useEffect, useState } from "react";
+import CheckInButtons from "./CheckInButtons";
+import CheckOutButtons from "./CheckOutButtons";
+import SafetyConcernBanner from "./SafetyConcernBanner";
 // import APICommunicator from '../services/adapter';
 
-class CheckInContainer extends React.Component {
-    
-    state = {
-        location: '',
-        lat: '',
-        long: ''
-    }
+const CheckInContainer = (props) => {
+  const { currentUser } = props;
 
-    componentDidMount() {
-        // const adapter = new APICommunicator();
-        Promise.all([
-            // adapter.getUserCheckIns(this.props.currentUser.id)
-            fetch(`http://localhost:3000/users/${this.props.currentUser.id}/latest_check_in`)
-                .then(resp => resp.json())
-                .then(check_in =>
-                    this.setState({location: check_in.location})
-                ),
-            // adapter.getUserSafetyConcerns(this.props.currentUser.id)
-            fetch(`http://localhost:3000/users/${this.props.currentUser.id}/safety_concerns`)
-                .then(resp => resp.json())
-                .then(safety_concern =>
-                    this.setState({
-                        lat: safety_concern.latitude,
-                        long: safety_concern.longitude
-                })
-            )
-        ])
-    }
+  const [stateObject, setStateObject] = useState({
+    location: "",
+    lat: "",
+    long: "",
+  });
 
-    
-    checkIn = e => {
-        const location = e.target.name
-        this.setState({ location })
-        
-        // const adapter = new APICommunicator();
-        // const check_in = {
-        //     user_id: this.props.currentUser.id,
-        //     location: e.target.name,
-        //     location_text: this.state.location_text
-        // }
-        // adapter.createCheckIn(check_in)
-        
-        fetch(`http://localhost:3000/users/${this.props.currentUser.id}/check_ins`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                user_id: this.props.currentUser.id,
-                location: location
+  useEffect(() => {
+    async function fetchData() {
+      await Promise.all([
+        // adapter.getUserCheckIns(currentUser.id)
+        fetch(`http://localhost:3000/users/${currentUser.id}/latest_check_in`)
+          .then((resp) => resp.json())
+          .then((check_in) =>
+            setStateObject({ ...stateObject, location: check_in.location })
+          ),
+        // adapter.getUserSafetyConcerns(currentUser.id)
+        fetch(`http://localhost:3000/users/${currentUser.id}/safety_concerns`)
+          .then((resp) => resp.json())
+          .then((safety_concern) =>
+            setStateObject({
+              ...stateObject,
+              lat: safety_concern.latitude,
+              long: safety_concern.longitude,
             })
-        })
+          ),
+      ]);
     }
+    fetchData();
+  }, [currentUser.id]);
 
-    checkOut = () => {
-        this.setState({ location: '' })
-        
-        fetch(`http://localhost:3000/check_ins_by_user_id/${this.props.currentUser.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-    }
+  const checkIn = async (e) => {
+    const location = e.target.name;
+    console.log("location", location);
+    setStateObject({ ...stateObject, location });
+    console.log("state object should have a location", location);
+    // const adapter = new APICommunicator();
+    // const check_in = {
+    //     user_id: currentUser.id,
+    //     location: e.target.name,
+    //     location_text: this.state.location_text
+    // }
+    // adapter.createCheckIn(check_in)
 
-    success = (pos) => {
-        this.setState({lat: pos.coords.latitude})
-        this.setState({long: pos.coords.longitude})
-        fetch(`http://localhost:3000/safety_concern`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                user_id: this.props.currentUser.id,
-                latitude: this.state.lat,
-                longitude: this.state.long
-            })
-        })
-     }
-        
-    error = (err) => {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
-       
-    logSafetyConcern = () => {
-        console.log('here')
-        navigator.geolocation.getCurrentPosition(this.success, this.error)
-    }
-    
-    render() {
-        return (
-            <div className='check-in-container'>  
-                <p>Your Location</p>
-                <div className='command-buttons'>
-                    {this.state.location ? <CheckOutButtons checkOut={this.checkOut} location={this.state.location} logSafetyConcern={this.logSafetyConcern} /> : < CheckInButtons checkIn={this.checkIn}/>}
-                    {this.state.lat && <SafetyConcernBanner />}
-                </div>
-            </div>
-        )
-    }
-}
+    await fetch(`http://localhost:3000/users/${currentUser.id}/check_ins`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        user_id: currentUser.id,
+        location,
+      }),
+    });
+  };
+
+  const checkOut = async () => {
+    setStateObject({ ...stateObject, location: "" });
+
+    await fetch(
+      `http://localhost:3000/check_ins_by_user_id/${currentUser.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+  };
+
+  const success = async (pos) => {
+    setStateObject({
+      ...stateObject,
+      lat: pos.coords.latitude,
+      long: pos.coords.longitude,
+    });
+    await fetch(`http://localhost:3000/safety_concern`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        user_id: currentUser.id,
+        latitude: stateObject.lat,
+        longitude: stateObject.long,
+      }),
+    });
+  };
+
+  const error = (err) => {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  };
+
+  const logSafetyConcern = () => {
+    navigator.geolocation.getCurrentPosition(success, error);
+  };
+
+  return (
+    <div className="check-in-container">
+      <p>Your Location</p>
+      <div className="command-buttons">
+        {stateObject.location ? (
+          <CheckOutButtons
+            checkOut={checkOut}
+            location={stateObject.location}
+            logSafetyConcern={logSafetyConcern}
+          />
+        ) : (
+          <CheckInButtons checkIn={checkIn} />
+        )}
+        {stateObject.lat && <SafetyConcernBanner />}
+      </div>
+    </div>
+  );
+};
 
 export default CheckInContainer;
