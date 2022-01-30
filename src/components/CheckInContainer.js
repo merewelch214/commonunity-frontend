@@ -39,9 +39,7 @@ const CheckInContainer = (props) => {
 
   const checkIn = async (e) => {
     const location = e.target.name;
-    console.log("location", location);
     setStateObject({ ...stateObject, location });
-    console.log("state object should have a location", location);
     // const adapter = new APICommunicator();
     // const check_in = {
     //     user_id: currentUser.id,

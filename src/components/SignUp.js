@@ -30,9 +30,7 @@ const SignUp = (props) => {
 
   const handleChange = (e) => {
     const name = e.target.name;
-    console.log("is this happening", name);
     const value = name === "is_manager" ? e.target.checked : e.target.value;
-    console.log("value?", value);
     setStateItem({
       ...stateItem,
       [name]: value,

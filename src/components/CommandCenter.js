@@ -1,15 +1,17 @@
-import React from 'react';
-import CheckInContainer from './CheckInContainer';
-import LocationFeed from './LocationFeed';
+import React from "react";
+import CheckInContainer from "./CheckInContainer";
+import LocationFeed from "./LocationFeed";
 
 const CommandCenter = (props) => {
-return (
-    <div className='CommandCenter'>
-        {!props.currentUser.is_manager && <CheckInContainer currentUser={props.currentUser} />}
-        <LocationFeed />
+  const { currentUser } = props;
+  return (
+    <div className="CommandCenter">
+      {!currentUser.is_manager && (
+        <CheckInContainer currentUser={currentUser} />
+      )}
+      <LocationFeed />
     </div>
-)
-
-}
+  );
+};
 
 export default CommandCenter;

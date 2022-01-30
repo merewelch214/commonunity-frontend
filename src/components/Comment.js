@@ -1,25 +1,29 @@
-import React from 'react';
-import Moment from 'react-moment';
+import React, { useEffect, useState } from "react";
+import Moment from "react-moment";
 
-class Comment extends React.Component {
-    state = {
-        user: ''
-    }
+const Comment = (props) => {
+  const [user, setUser] = useState("");
+  const { content, created_at } = props;
 
-    componentDidMount() {
-        fetch(`http://localhost:3000/comments/${this.props.id}`)
-        .then(resp=>resp.json())
-        .then(comment=>this.setState({user: comment.user.name}))
+  useEffect(() => {
+    async function fetchData() {
+      await fetch(`http://localhost:3000/comments/${this.props.id}`)
+        .then((resp) => resp.json())
+        .then((comment) => setUser({ user: comment.user.name }));
     }
+    fetchData();
+  }, []);
 
-    render() {
-        return (
-            <div className='comment-card'>
-                <b> {this.state.user} </b>{this.props.content}< br/>
-                <Moment format="LLL" className='time'>{this.props.created_at}</Moment>
-            </div>
-        )
-    }
-}
+  return (
+    <div className="comment-card">
+      <b> {user} </b>
+      {content}
+      <br />
+      <Moment format="LLL" className="time">
+        {created_at}
+      </Moment>
+    </div>
+  );
+};
 
 export default Comment;

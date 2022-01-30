@@ -15,7 +15,6 @@ const App = (props) => {
   const [stateObject, setStateObject] = useState(initialState);
 
   const setUser = (user) => {
-    console.log("user", user);
     setStateObject({
       ...stateObject,
       currentUser: user,
