@@ -3,20 +3,20 @@ import Moment from "react-moment";
 
 const Comment = (props) => {
   const [user, setUser] = useState("");
-  const { content, created_at } = props;
+  const { content, created_at, id: commentId } = props;
 
   useEffect(() => {
     async function fetchData() {
-      await fetch(`http://localhost:3000/comments/${this.props.id}`)
+      await fetch(`http://localhost:3000/comments/${commentId}`)
         .then((resp) => resp.json())
         .then((comment) => setUser({ user: comment.user.name }));
     }
     fetchData();
-  }, []);
+  }, [commentId]);
 
   return (
     <div className="comment-card">
-      <b> {user} </b>
+      <b> {user.name}</b>
       {content}
       <br />
       <Moment format="LLL" className="time">
