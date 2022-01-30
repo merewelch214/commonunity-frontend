@@ -1,41 +1,50 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
-class Header extends React.Component {
-    state = {
-        notifications: 0
+const Header = (props) => {
+  const { currentUser, showFeed, showSafety, logOut } = props;
+  const [notifications, setNotifications] = useState("");
+  useEffect(() => {
+    async function fetchData() {
+      await fetch("http://localhost:3000/unresolved_safety_concerns")
+        .then((resp) => resp.json())
+        .then((numConcerns) => setNotifications(numConcerns));
     }
+    fetchData();
+  }, []);
 
-    componentDidMount() { 
-        fetch('http://localhost:3000/any_safety_concern')
-        .then(resp=>resp.json())
-        .then(numConcerns=>
-            this.setState({
-                notifications: numConcerns
-            }))
-    }
-
-    render() {
-        console.log(this.state.notifications)
-        return (
-            <div className='header'>
-                <h1> CommonUnity </h1>
-                <ul className='manager-buttons'>
-                    <li>
-                        {this.props.currentUser.is_manager && <NavLink to="/feed" exact onClick={this.props.showFeed}>Announcements</NavLink>}
-                    </li>                    
-                    <li>{this.props.currentUser.is_manager && <NavLink to="/safety_concerns"
-                        exact onClick={this.props.showSafety}>Safety Concerns {this.state.notifications > 0 ? '(' + this.state.notifications + ')' : null }
-                        </NavLink>}
-                    </li>
-                    <li> 
-                        {this.props.currentUser && <NavLink to="/" exact onClick={this.props.logOut}>Log Out</NavLink> }
-                    </li>
-                    <li id='user-initial'>{this.props.currentUser && this.props.currentUser.name[0]}</li>
-                </ul>
-            </div>
-        )
-    }
-}
+  return (
+    <div className="header">
+      <h1> CommonUnity </h1>
+      <ul className="manager-buttons">
+        <li>
+          {currentUser.is_manager && (
+            <NavLink to="/feed" exact onClick={showFeed}>
+              Announcements
+            </NavLink>
+          )}
+        </li>
+        <li>
+          {currentUser.is_manager && (
+            <NavLink to="/safety_concerns" exact onClick={showSafety}>
+              Safety Concerns{" "}
+              {notifications > 0 ? "(" + notifications + ")" : null}
+            </NavLink>
+          )}
+        </li>
+        <li>
+          {currentUser && (
+            <NavLink to="/" exact onClick={logOut}>
+              Log Out
+            </NavLink>
+          )}
+        </li>
+        {currentUser && currentUser.name && (
+          <li id="user-initial">{currentUser.name[0]}</li>
+        )}
+      </ul>
+    </div>
+  );
+};
 
 export default Header;
