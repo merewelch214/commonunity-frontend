@@ -8,6 +8,7 @@ import {
 
 const LocationFeed = (props) => {
   const { check_out_time, location, check_in_time, user } = props;
+  console.log("user", user);
   return (
     <div className="location-card">
       <div className="location-icon">
